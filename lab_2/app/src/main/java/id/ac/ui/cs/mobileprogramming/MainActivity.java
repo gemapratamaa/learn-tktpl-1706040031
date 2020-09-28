@@ -16,11 +16,9 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "Lab 2";
 
     public String getRandomNumber() {
-
         Random random = new Random();
         int randomNumber = random.nextInt(101) + 1;
         return String.valueOf(randomNumber);
-
     }
 
     @Override
