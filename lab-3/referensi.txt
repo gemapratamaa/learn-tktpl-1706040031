@@ -1,1 +1,5 @@
 https://stackoverflow.com/questions/6173400/how-to-hide-a-button-programmatically
+
+https://stackoverflow.com/questions/21130493/how-to-close-android-app-completely
+
+https://stackoverflow.com/questions/13385289/remove-app-from-recent-apps-programmatically....:
