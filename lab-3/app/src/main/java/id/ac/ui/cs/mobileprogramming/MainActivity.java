@@ -11,13 +11,12 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.Toast;
 
-
 public class MainActivity extends AppCompatActivity {
 
     private Chronometer chronometer;
     private long pauseOffset;
     private boolean isRunning;
-    public Button startButton;
+    public Button startAndResumeButton;
     public Button exitButton;
 
     @Override
@@ -27,14 +26,14 @@ public class MainActivity extends AppCompatActivity {
         chronometer = findViewById(R.id.chronometer);
     }
 
-    public void startChronometer(View view) {
-        startButton = findViewById(R.id.startButton);
+    public void startAndResumeChronometer(View view) {
+        startAndResumeButton = findViewById(R.id.startButton);
         if (!isRunning) {
             // Supaya start dari pas START diklik
             chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
             chronometer.start();
             isRunning = true;
-            startButton.setVisibility(View.INVISIBLE);
+            startAndResumeButton.setVisibility(View.INVISIBLE);
         }
 
     }
@@ -44,17 +43,20 @@ public class MainActivity extends AppCompatActivity {
             chronometer.stop(); // Cuma stop update text
             pauseOffset = SystemClock.elapsedRealtime() - chronometer.getBase();
             isRunning = false;
-            startButton.setVisibility(View.VISIBLE);
-            startButton.setText("RESUME");
+            startAndResumeButton.setVisibility(View.VISIBLE);
+            startAndResumeButton.setText("RESUME");
         } else {
-            startButton.setText("START");
+            startAndResumeButton.setText("START");
         }
     }
 
     public void resetChronometer(View view) {
         chronometer.setBase(SystemClock.elapsedRealtime());
+        chronometer.stop();
+        isRunning = false;
         pauseOffset = 0L;
-        startButton.setText("START");
+        startAndResumeButton.setText("START");
+        startAndResumeButton.setVisibility(View.VISIBLE);
     }
 
     @Override
