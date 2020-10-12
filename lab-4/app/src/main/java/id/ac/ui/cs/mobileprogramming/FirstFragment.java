@@ -32,8 +32,9 @@ public class FirstFragment extends Fragment {
 
         fragmentButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 editText.setText("First fragment");
+                //editText.setVisibility(View.VISIBLE);
             }
         });
 

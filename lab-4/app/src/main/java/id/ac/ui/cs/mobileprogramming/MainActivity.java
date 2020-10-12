@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         buttonForFirstFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.i("button","first fragment called");
                 setFragment(new FirstFragment());
             }
         });
@@ -33,17 +35,20 @@ public class MainActivity extends AppCompatActivity {
         buttonForSecondFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.i("button","second fragment called");
                 setFragment(new SecondFragment());
+
             }
         });
 
     }
 
-    public void setFragment(Fragment fragment) {
+    private void setFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         fragmentTransaction.replace(R.id.frameLayout, fragment);
+        fragmentTransaction.commit();
 
     }
 }

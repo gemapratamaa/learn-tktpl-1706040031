@@ -13,21 +13,22 @@ import android.widget.EditText;
 public class SecondFragment extends Fragment {
 
     View view;
-    Button fragmentButton2;
-    EditText editText2;
+    Button fragmentButton;
+    EditText editText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_second, container, false);
-        fragmentButton2 = (Button) view.findViewById(R.id.fragmentButton2);
-        editText2 = (EditText) view.findViewById(R.id.fragmentEditText2);
+        fragmentButton = (Button) view.findViewById(R.id.fragmentButton2);
+        editText = (EditText) view.findViewById(R.id.fragmentEditText2);
 
-        fragmentButton2.setOnClickListener(new View.OnClickListener() {
+        fragmentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editText2.setText("Second fragment");
+                editText.setText("Second fragment");
+                //editText.setVisibility(View.VISIBLE);
             }
         });
 
