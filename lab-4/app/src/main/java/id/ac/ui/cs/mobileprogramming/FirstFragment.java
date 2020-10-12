@@ -1,36 +1,43 @@
 package id.ac.ui.cs.mobileprogramming;
 
-import androidx.lifecycle.ViewModelProviders;
-
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link FirstFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
 public class FirstFragment extends Fragment {
 
-    private FirstViewModel mViewModel;
-
-    public static FirstFragment newInstance() {
-        return new FirstFragment();
-    }
+    View view;
+    Button fragmentButton;
+    EditText editText;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.first_fragment, container, false);
-    }
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        view = inflater.inflate(R.layout.fragment_first, container, false);
+        fragmentButton = (Button) view.findViewById(R.id.fragmentButton1);
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(FirstViewModel.class);
-        // TODO: Use the ViewModel
-    }
+        editText = (EditText) view.findViewById(R.id.fragmentEditText);
 
+        fragmentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editText.setText("First fragment");
+            }
+        });
+
+        return view;
+
+    }
 }
