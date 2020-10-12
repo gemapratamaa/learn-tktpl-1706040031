@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.Button;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MyInterface {
 
     Button buttonForFirstFragment;
     Button buttonForSecondFragment;
@@ -43,12 +43,22 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        setFragment(new FirstFragment());
+    }
+
     private void setFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         fragmentTransaction.replace(R.id.frameLayout, fragment);
         fragmentTransaction.commit();
+
+    }
+
+    @Override
+    public void setText(String str) {
 
     }
 }
