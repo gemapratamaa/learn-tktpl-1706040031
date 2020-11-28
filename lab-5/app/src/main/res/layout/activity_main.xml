@@ -10,7 +10,18 @@
         android:id = "@+id/wifiList"
         android:layout_width = "match_parent"
         android:layout_height = "match_parent"
-        android:layout_above = "@+id/scanBtn" />
+        android:layout_above = "@+id/scanBtn" >
+    </ListView>
+
+    <Button
+        android:id="@+id/sendBtn"
+        android:layout_width = "match_parent"
+        android:layout_height = "50dp"
+        android:layout_alignParentBottom = "true"
+        android:layout_gravity = "bottom"
+        android:layout_margin = "70dp"
+        android:text="Send List to Endpoint" />
+
     <Button
         android:id = "@+id/scanBtn"
         android:layout_width = "match_parent"
@@ -19,4 +30,5 @@
         android:layout_gravity = "bottom"
         android:layout_margin = "15dp"
         android:text = "Scan for WiFi" />
+
 </RelativeLayout>
