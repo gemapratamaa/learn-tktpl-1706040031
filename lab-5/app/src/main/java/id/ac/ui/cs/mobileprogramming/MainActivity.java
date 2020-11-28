@@ -82,20 +82,11 @@ public class MainActivity extends AppCompatActivity {
 
             RequestQueue queue = Volley.newRequestQueue(this);
             JsonObjectRequest jor = new JsonObjectRequest(Request.Method.POST, ENDPOINT, jsonObject,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject jsonObject) {
-                            Log.e("Response", jsonObject.toString());
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError volleyError) {
-                            Log.e("Error.Response", volleyError.toString());
-                        }
-                    });
+                    jsonObject1 -> Log.e("Response", jsonObject1.toString()),
+                    volleyError -> Log.e("Error.Response", volleyError.toString()));
 
             queue.add(jor);
+            Toast.makeText(MainActivity.this, "Send success", Toast.LENGTH_SHORT).show();
         });
     }
 
