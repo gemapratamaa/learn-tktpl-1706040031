@@ -8,16 +8,17 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 
 
-import android.support.annotation.NonNull;
+//import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 //import android.support.v4.app.ActivityCompat;
 import androidx.core.app.ActivityCompat;
 
-import android.support.v4.content.ContextCompat;
+//import android.support.v4.content.ContextCompat;
 import androidx.core.content.ContextCompat;
 
 
-import android.support.v7.app.AppCompatActivity;
+//import android.support.v7.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         getWifi();
     }
     private void getWifi() {
-        if (Build.VERSION.SDK_INT > = Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Toast.makeText(MainActivity.this, "version> = marshmallow", Toast.LENGTH_SHORT).show();
             if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)
             != PackageManager.PERMISSION_GRANTED) {
@@ -91,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case MY_PERMISSIONS_ACCESS_COARSE_LOCATION:
-                if (grantResults.length > 0 && grantResults[0] = = PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(MainActivity.this, "permission granted", Toast.LENGTH_SHORT).show();
                 wifiManager.startScan();
             } else {
