@@ -32,6 +32,7 @@ class WifiReceiver extends BroadcastReceiver {
             for (ScanResult scanResult : wifiList) {
                 sb.append("\n").append(scanResult.SSID);
                 wifiNames.add(scanResult.SSID);
+                //MainActivity.wifiNamesToSend.add(scanResult.SSID);
             }
 
             ArrayList<String> uniqueWifiNames = filterUniqueValues(wifiNames);
