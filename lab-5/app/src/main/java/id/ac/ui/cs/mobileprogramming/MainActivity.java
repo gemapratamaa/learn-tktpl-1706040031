@@ -16,11 +16,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 public class MainActivity extends AppCompatActivity {
     private ListView wifiList;
     private WifiManager wifiManager;
     private final int MY_PERMISSIONS_ACCESS_COARSE_LOCATION = 1;
+    private final String ENDPOINT = "https://8ead701060ca478e6bf5d2e0a5c4ea7c.m.pipedream.net";
     WifiReceiver receiverWifi;
 
     @Override
@@ -95,8 +106,34 @@ public class MainActivity extends AppCompatActivity {
             break;
         }
     }
+
+    public void volleyPost() {
+        //String postUrl = "https://reqres.in/api/users";
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+        JSONObject postData = new JSONObject();
+        try {
+            postData.put("name", "Jonathan");
+            postData.put("job", "Software Engineer");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ENDPOINT, postData, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                System.out.println(response);
+            }
+        }, error -> error.printStackTrace());
+
+        requestQueue.add(jsonObjectRequest);
+
+    }
+
+
 }
 
+// https://medium.com/@nabeelj/making-a-simple-get-and-post-request-using-volley-beginners-guide-ee608f10c0a9
 // https://stackoverflow.com/questions/3531940/how-to-get-name-of-wifi-network-out-of-android-using-android-api
 // https://stackoverflow.com/questions/20741142/android-list-wifi-access-points
 // https://stackoverflow.com/questions/32742327/neither-user-10102-nor-current-process-has-android-permission-read-phone-state

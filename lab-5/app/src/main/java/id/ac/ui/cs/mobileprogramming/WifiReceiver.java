@@ -16,6 +16,8 @@ class WifiReceiver extends BroadcastReceiver {
     StringBuilder sb;
     ListView wifiDeviceList;
 
+    ArrayList<String> wifiNames = new ArrayList<>();
+
     public WifiReceiver(WifiManager wifiManager, ListView wifiDeviceList) {
         this.wifiManager = wifiManager;
         this.wifiDeviceList = wifiDeviceList;
@@ -26,14 +28,29 @@ class WifiReceiver extends BroadcastReceiver {
         if (WifiManager.SCAN_RESULTS_AVAILABLE_ACTION.equals(action)) {
             sb = new StringBuilder();
             List<ScanResult> wifiList = wifiManager.getScanResults();
-            ArrayList<String> deviceList = new ArrayList<>();
+
             for (ScanResult scanResult : wifiList) {
                 sb.append("\n").append(scanResult.SSID);
-                deviceList.add(scanResult.SSID);
+                wifiNames.add(scanResult.SSID);
             }
 
-            ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, deviceList.toArray());
+            ArrayList<String> uniqueWifiNames = filterUniqueValues(wifiNames);
+
+            ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, uniqueWifiNames.toArray());
             wifiDeviceList.setAdapter(arrayAdapter);
         }
     }
+
+    public ArrayList<String> filterUniqueValues(ArrayList<String> arrayList) {
+        ArrayList<String> newList = new ArrayList<>();
+
+        for (String element : arrayList) {
+            if (!newList.contains(element)) {
+                newList.add(element);
+            }
+        }
+
+        return newList;
+    }
+
 }
