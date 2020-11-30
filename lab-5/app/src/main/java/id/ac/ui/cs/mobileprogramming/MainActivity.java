@@ -80,10 +80,11 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
+            Log.i("Wifi names:", jsonObject.toString());
             RequestQueue queue = Volley.newRequestQueue(this);
             JsonObjectRequest jor = new JsonObjectRequest(Request.Method.POST, ENDPOINT, jsonObject,
-                    jsonObject1 -> Log.e("Response", jsonObject1.toString()),
-                    volleyError -> Log.e("Error.Response", volleyError.toString()));
+                    jsonObject1 -> Log.i("Response", jsonObject1.toString()),
+                    volleyError -> Log.e("Error. Response", volleyError.toString()));
 
             queue.add(jor);
             Toast.makeText(MainActivity.this, "Send success", Toast.LENGTH_SHORT).show();
@@ -161,12 +162,10 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ENDPOINT, postData, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                System.out.println(response);
-            }
-        }, error -> error.printStackTrace());
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ENDPOINT, postData,
+                response -> System.out.println(response),
+                error -> error.printStackTrace()
+        );
 
         requestQueue.add(jsonObjectRequest);
 
