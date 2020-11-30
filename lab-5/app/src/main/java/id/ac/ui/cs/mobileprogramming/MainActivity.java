@@ -20,8 +20,6 @@ import androidx.core.content.ContextCompat;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -29,11 +27,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
-
 public class MainActivity extends AppCompatActivity {
-    //public static ArrayList<String> wifiNamesToSend;
+
     private ListView wifiList;
     private WifiManager wifiManager;
     private final int MY_PERMISSIONS_ACCESS_COARSE_LOCATION = 1;
@@ -57,41 +52,48 @@ public class MainActivity extends AppCompatActivity {
         }
 
         scanButton.setOnClickListener(v -> {
-            if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(MainActivity.this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(
-                        MainActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, MY_PERMISSIONS_ACCESS_COARSE_LOCATION);
+                        MainActivity.this,
+                        new String[] {Manifest.permission.ACCESS_COARSE_LOCATION},
+                        MY_PERMISSIONS_ACCESS_COARSE_LOCATION);
             } else {
                 wifiManager.startScan();
             }
         });
 
-        // https://stackoverflow.com/questions/41870263/array-as-volley-post-request-params
+
         sendButton.setOnClickListener(v -> {
             String[] wifiNamesToSend = getStringArray(wifiList.getAdapter());
             JSONObject jsonObject = new JSONObject();
             JSONArray jsonArray = new JSONArray();
+
             for (String name : wifiNamesToSend) {
                 jsonArray.put(name);
             }
+
             try {
                 jsonObject.put("wifi_names", jsonArray);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-
             Log.i("Wifi names:", jsonObject.toString());
             RequestQueue queue = Volley.newRequestQueue(this);
             JsonObjectRequest jor = new JsonObjectRequest(Request.Method.POST, ENDPOINT, jsonObject,
                     jsonObject1 -> Log.i("Response", jsonObject1.toString()),
-                    volleyError -> Log.e("Error. Response", volleyError.toString()));
+                    volleyError -> Log.e("Error", volleyError.toString()));
 
             queue.add(jor);
-            Toast.makeText(MainActivity.this, "Send success", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this,
+                    "Sent " + jsonObject.toString() + " to endpoint",
+                    Toast.LENGTH_LONG)
+                    .show();
         });
     }
 
-    public static String[] getStringArray(ListAdapter adapter){
+    public static String[] getStringArray(ListAdapter adapter) {
         String[] a = new String[adapter.getCount()];
 
         for(int i = 0; i < a.length; i++) {
@@ -150,34 +152,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void volleyPost() {
-        //String postUrl = "https://reqres.in/api/users";
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-
-        JSONObject postData = new JSONObject();
-        try {
-            postData.put("name", "Jonathan");
-            postData.put("job", "Software Engineer");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ENDPOINT, postData,
-                response -> System.out.println(response),
-                error -> error.printStackTrace()
-        );
-
-        requestQueue.add(jsonObjectRequest);
-
-    }
-
-
 }
-
-// https://medium.com/@nabeelj/making-a-simple-get-and-post-request-using-volley-beginners-guide-ee608f10c0a9
-// https://stackoverflow.com/questions/3531940/how-to-get-name-of-wifi-network-out-of-android-using-android-api
-// https://stackoverflow.com/questions/20741142/android-list-wifi-access-points
-// https://stackoverflow.com/questions/32742327/neither-user-10102-nor-current-process-has-android-permission-read-phone-state
-// https://stackoverflow.com/questions/18741034/how-to-get-available-wifi-networks-and-display-them-in-a-list-in-android
-// https://www.tutorialspoint.com/how-to-get-available-wifi-networks-and-display-them-in-a-list-in-android
-// https://www.geeksforgeeks.org/how-to-remove-duplicates-from-arraylist-in-java/

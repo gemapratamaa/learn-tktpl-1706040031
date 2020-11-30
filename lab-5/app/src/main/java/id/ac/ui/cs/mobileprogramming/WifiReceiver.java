@@ -32,12 +32,12 @@ class WifiReceiver extends BroadcastReceiver {
             for (ScanResult scanResult : wifiList) {
                 sb.append("\n").append(scanResult.SSID);
                 wifiNames.add(scanResult.SSID);
-                //MainActivity.wifiNamesToSend.add(scanResult.SSID);
             }
 
             ArrayList<String> uniqueWifiNames = filterUniqueValues(wifiNames);
 
-            ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, uniqueWifiNames.toArray());
+            ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1,
+                    uniqueWifiNames.toArray());
             wifiDeviceList.setAdapter(arrayAdapter);
         }
     }
