@@ -19,4 +19,4 @@ Java_id_ac_ui_cs_mobileprogramming_MainActivity_randomIntFromJNI(JNIEnv *env, jo
     int number_array[] = {1, 2};
     int random_index = rand() % 2;
     return number_array[random_index];
-}extern "C"
+}

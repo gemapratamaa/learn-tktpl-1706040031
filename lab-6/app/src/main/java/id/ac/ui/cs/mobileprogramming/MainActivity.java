@@ -9,10 +9,10 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "Lab 1";
+
     static {
         System.loadLibrary("native-lib");
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,12 +21,9 @@ public class MainActivity extends AppCompatActivity {
 
         TextView randomNumber = findViewById(R.id.random_number);
         TextView hello = findViewById(R.id.hello);
-
         int randomInt = randomIntFromJNI();
-
         Log.i(TAG,"random int: " + randomInt);
         String text = helloWorldFromJNI(randomInt);
-
 
         hello.setText(text);
         randomNumber.setText("Your random number is: " + randomInt);
@@ -34,8 +31,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public native int randomIntFromJNI();
-
     public native String helloWorldFromJNI(int x);
-
 
 }
