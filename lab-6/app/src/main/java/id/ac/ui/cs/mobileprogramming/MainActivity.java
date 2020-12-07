@@ -19,27 +19,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView tv = findViewById(R.id.hello);
+        TextView randomNumber = findViewById(R.id.random_number);
+        TextView hello = findViewById(R.id.hello);
 
         int randomInt = randomIntFromJNI();
-        Log.i("main","random int: " + randomInt);
+
+        Log.i(TAG,"random int: " + randomInt);
         String text = helloWorldFromJNI(randomInt);
-        tv.setText(text);
 
-        /*
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG, "Button clicked");
-                RandomNumber rn = new RandomNumber();
-                initialNumber.setText(rn.getRandomNumber());
-            }
-        });
 
-         */
+        hello.setText(text);
+        randomNumber.setText("Your random number is: " + randomInt);
+
     }
-
-    public native String stringFromJNI();
 
     public native int randomIntFromJNI();
 

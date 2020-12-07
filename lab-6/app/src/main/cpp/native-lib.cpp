@@ -20,10 +20,3 @@ Java_id_ac_ui_cs_mobileprogramming_MainActivity_randomIntFromJNI(JNIEnv *env, jo
     int random_index = rand() % 2;
     return number_array[random_index];
 }extern "C"
-
-JNIEXPORT jstring JNICALL
-Java_id_ac_ui_cs_mobileprogramming_MainActivity_stringFromJNI(JNIEnv *env, jobject thiz) {
-
-    std::string hello = "Hello from C++";
-    return env->NewStringUTF(hello.c_str());
-}
