@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG,"random int: " + randomInt);
         String text = helloWorldFromJNI(randomInt);
 
-        hello.setText(text);
+        hello.setText("So, your message is: " + text);
         randomNumber.setText("Your random number is: " + randomInt);
 
     }
