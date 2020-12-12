@@ -13,6 +13,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TextView text = findViewById(R.id.hello_world);
-        text.setTextColor(Color.parseColor("#00000"));
+        text.setTextColor(Color.parseColor("#000000"));
     }
 }
